@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -43,14 +44,28 @@ to quickly create a Cobra application.`,
 			return
 		}
 
+		kbot.Handle("/start", func(m telebot.Context) error {
+			return m.Send(fmt.Sprintf("Hello I'm Kbot %s!", appVersion))
+		})
+
 		kbot.Handle(telebot.OnText, func(m telebot.Context) error {
 
-			log.Print(m.Message().Payload, m.Text())
-			payload := m.Message().Payload
+			var (
+				user = m.Sender()
+				text = m.Text()
+			)
 
-			switch payload {
+			log.Print(m.Message().Payload, text)
+
+			switch text {
 			case "hello":
-				err = m.Send(fmt.Sprintf("Hello I'm Kbot %s!", appVersion))
+				err = m.Send(fmt.Sprintf("Hi %s! How are you?", user.FirstName))
+			case "/my_username":
+				err = m.Send(user.Username)
+			case "/my_id":
+				err = m.Send(strconv.FormatInt(user.ID, 10))
+			default:
+				err = m.Send(text)
 			}
 
 			return err
