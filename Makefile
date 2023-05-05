@@ -1,8 +1,8 @@
 APP=$(shell basename $(shell git remote get-url origin))
 REGISTRY=vincewhite19
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-TARGETOS=linux
-TARGETARCH=$(shell dpkg --print-architecture)
+TARGETOS=linux #linux darwin windows
+TARGETARCH=$(shell dpkg --print-architecture) #amd64 arm
 
 format:
 	gofmt -s -w ./
@@ -26,4 +26,4 @@ push:
 	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
 
 clean:
-	rm -rf kbot
+	rm -rf kbot && docker rmi -f ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
