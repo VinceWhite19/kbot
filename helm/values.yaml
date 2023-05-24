@@ -1,0 +1,16 @@
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+image:
+  repository: "vincewhite19"
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1.0.2-a98fb88"
+secret:
+  name: "kbot"
+  env: "TELE_TOKEN"
+  key: "token"
+securityContext:
+  privileged: true
+
