@@ -1,5 +1,5 @@
 APP=$(shell basename $(shell git remote get-url origin))
-REGISTRY=vincewhite19
+REGISTRY=k8s-k3s-385712
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 TARGETOS=linux#linux darwin windows
 TARGETARCH=$(shell dpkg --print-architecture)#amd64 arm64
