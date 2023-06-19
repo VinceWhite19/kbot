@@ -6,8 +6,9 @@ replicaCount: 1
 image:
   repository: "vincewhite19"
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v.1.0.7-649d19e"
+  tag: "v.1.0.7-8d5cb88"
   arch: amd64
+  os: linux
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
